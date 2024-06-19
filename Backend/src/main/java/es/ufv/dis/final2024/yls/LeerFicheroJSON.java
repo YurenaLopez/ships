@@ -13,7 +13,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class LeerFicheroJSON {
-    public static ArrayList<Ships> LeerFicheroProductos() throws IOException {
+    public static ArrayList<Ships> LeerFicheroShips() throws IOException {
         // Obtiene el archivo JSON desde la ruta relativa al directorio del proyecto
         File ships = new File("peticiones/data.json");
 
