@@ -9,6 +9,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import es.ufv.dis.final2022.yls.LeerFicheroJSON;
+import es.ufv.dis.final2022.yls.PDFManager;
 
 @RestController
 public class ShipsController {
@@ -17,7 +19,7 @@ public class ShipsController {
     @GetMapping("/ships")
     public ArrayList<Ships> ships() throws IOException {
 
-        return LeerFicheroJSON.LeerFicheroShips();
+        return es.ufv.dis.final2022.yls.LeerFicheroJSON.LeerFicheroShips();
     }
 
     @PostMapping("/ships")
@@ -30,15 +32,14 @@ public class ShipsController {
         // Convertimos la lista actualizada a JSON manteniendo el formato
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String json = gson.toJson(datos);
-
-        // Escribimos el JSON actualizado en el archivo
         File file = new File("peticiones/data.json");
+
         FileWriter fileWriter = new FileWriter(file);
         fileWriter.write(json); // Escribir el JSON actualizado
         fileWriter.flush();
         fileWriter.close();
 
-        es.ufv.dis.final2022.yls.PDFManager.GenerarPDF(nuevoDato,nuevoDato.getName());
+        PDFManager.GenerarPDF(nuevoDato,nuevoDato.getName());
 
         return datos;
     }

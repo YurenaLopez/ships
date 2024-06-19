@@ -6,12 +6,20 @@ import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 import es.ufv.dis.final2024.yls.Ships;
+import org.apache.commons.io.FileUtils;
 
+import java.io.File;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 
 public class PDFManager {
     public static void GenerarPDF(Ships shipNuevo, String nombreNave) {
         try {
+            InputStream inputStream = es.ufv.dis.final2022.yls.LeerFicheroJSON.class.getClassLoader().getResourceAsStream("data.json");
+            File file = new File("data.json");
+            FileUtils.copyInputStreamToFile(inputStream, file);
+
+
             Document doc = new Document(PageSize.A4, 50, 50, 100, 72);
             PdfWriter writer = PdfWriter.getInstance(doc, new FileOutputStream("peticiones/" + nombreNave + ".pdf"));
             doc.open();
