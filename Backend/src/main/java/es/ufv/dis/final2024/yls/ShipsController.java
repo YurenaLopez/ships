@@ -17,12 +17,12 @@ public class ShipsController {
     @GetMapping("/ships")
     public ArrayList<Ships> ships() throws IOException {
 
-        return es.ufv.dis.final2022.yls.LeerFicheroJSON.LeerFicheroShips();
+        return LeerFicheroJSON.LeerFicheroShips();
     }
 
     @PostMapping("/ships")
     public ArrayList<Ships> createShips(@RequestBody Ships nuevoDato) throws IOException {
-        ArrayList<Ships> datos = es.ufv.dis.final2022.yls.LeerFicheroJSON.LeerFicheroShips();
+        ArrayList<Ships> datos = LeerFicheroJSON.LeerFicheroShips();
 
         // Añadimos los datos nuevos al fichero existente
         datos.add(nuevoDato);
@@ -38,7 +38,7 @@ public class ShipsController {
         fileWriter.flush();
         fileWriter.close();
 
-        PDFManager.GenerarPDF(nuevoDato,nuevoDato.getName());
+        es.ufv.dis.final2022.yls.PDFManager.GenerarPDF(nuevoDato,nuevoDato.getName());
 
         return datos;
     }

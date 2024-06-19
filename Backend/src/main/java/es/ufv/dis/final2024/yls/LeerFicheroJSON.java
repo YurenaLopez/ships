@@ -1,25 +1,28 @@
-package es.ufv.dis.final2022.yls;
+package es.ufv.dis.final2024.yls;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
-import es.ufv.dis.final2024.yls.Ships;
-import es.ufv.dis.final2024.yls.ShipsApplication;
+import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class LeerFicheroJSON {
     public static ArrayList<Ships> LeerFicheroShips() throws IOException {
-        // Obtiene el archivo JSON desde la ruta relativa al directorio del proyecto
-        File ships = new File("peticiones/data.json");
+        InputStream inputStream = LeerFicheroJSON.class.getClassLoader().getResourceAsStream("data.json");
+        // Copia el archivo JSON a un File
+        File ships = new File("data.json");
+        FileUtils.copyInputStreamToFile(inputStream, ships);
+
 
         // Verifica si el archivo existe
         if (!ships.exists()) {
-            throw new IOException("El archivo peticiones/Datos.json no se encuentra.");
+            throw new IOException("El archivo peticiones/data.json no se encuentra.");
         }
 
         // Inicializa Gson
